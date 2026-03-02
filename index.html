@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotoShine · Taller y estética de motos</title>
+    <!-- Fuente moderna de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos (versión 6 gratuita) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f6f6f6;
+            color: #1f1f1f;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background-color: #0b0b0b;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #f97316; /* naranja moto */
+        }
+
+        .logo span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #aaa;
+            display: block;
+        }
+
+        .header-contact {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .header-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .header-contact-item i {
+            color: #f97316;
+            width: 20px;
+            font-size: 1.1rem;
+        }
+
+        .header-contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .header-contact-item a:hover {
+            color: #f97316;
+        }
+
+        /* Indicador de estado (abierto/cerrado) */
+        .status-indicator {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: 16px;
+            background-color: #2ecc71;
+            color: white;
+        }
+        .status-indicator.closed {
+            background-color: #e74c3c;
+        }
+
+        /* Hero / Presentación */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center 30%;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 32px;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #f97316;
+            color: white;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background-color 0.2s, transform 0.1s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e85d0e;
+            transform: scale(1.02);
+        }
+
+        /* Secciones generales */
+        .section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #f97316;
+            margin: 16px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Servicios */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 2.8rem;
+            color: #f97316;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* Tabla de horarios */
+        .schedule-table {
+            max-width: 600px;
+            margin: 30px auto 0;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .schedule-row {
+            display: flex;
+            padding: 12px 24px;
+            border-bottom: 1px solid #eee;
+        }
+        .schedule-row:last-child {
+            border-bottom: none;
+        }
+        .schedule-row.today {
+            background-color: #fef3e7;
+            font-weight: 600;
+        }
+        .schedule-day {
+            flex: 1;
+            text-transform: capitalize;
+        }
+        .schedule-hours {
+            flex: 1;
+            text-align: right;
+            color: #f97316;
+            font-weight: 500;
+        }
+
+        /* Sobre nosotros / extracto */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text {
+            flex: 1 1 300px;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #0b0b0b;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .about-highlight {
+            background-color: #fef3e7;
+            border-left: 5px solid #f97316;
+            padding: 16px 24px;
+            border-radius: 12px;
+            margin-top: 24px;
+        }
+
+        .about-highlight i {
+            color: #f97316;
+            margin-right: 8px;
+        }
+
+        .about-image {
+            flex: 1 1 300px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Contacto */
+        .contact {
+            background-color: #f0f0f0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info h3, .contact-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+
+        .contact-detail i {
+            color: #f97316;
+            width: 28px;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+
+        .contact-detail a, .contact-detail span {
+            color: #1f1f1f;
+            text-decoration: none;
+        }
+
+        .contact-detail a:hover {
+            text-decoration: underline;
+            color: #f97316;
+        }
+
+        .map-placeholder {
+            background-color: #ddd;
+            height: 180px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            font-weight: 500;
+            margin-top: 20px;
+            background-image: url('https://maps.googleapis.com/maps/api/staticmap?center=22.441944,-79.951111&zoom=14&size=400x180&key=YOUR_API_KEY&markers=color:orange%7C22.441944,-79.951111');
+            background-size: cover;
+            background-position: center;
+        }
+        /* Nota: las coordenadas son aproximadas para Santa Clara, Cuba. Reemplazar con las exactas si es necesario */
+
+        /* Formulario sencillo (solo diseño, no funcional) */
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            background-color: white;
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #f97316;
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            width: 100%;
+        }
+
+        .contact-form button:hover {
+            background-color: #e85d0e;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0b0b0b;
+            color: #aaa;
+            padding: 32px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.4rem;
+            margin: 0 12px;
+            transition: color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: #f97316;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <h1>MotoShine</h1>
+                <span>Estética y mantenimiento de motos</span>
+            </div>
+            <div class="header-contact">
+                <div class="header-contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <a href="tel:+5355532138">05 5532138</a>
+                </div>
+                <div class="header-contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>C28M+RJX, Carr. de Sagua, Santa Clara</span>
+                </div>
+                <div class="header-contact-item">
+                    <i class="far fa-clock"></i>
+                    <span id="status-text">Cargando horario...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>El mejor cuidado para tu moto</h2>
+            <p>Más de 10 años dando brillo y potencia a las dos ruedas. Limpieza profesional, mecánica rápida y asesoramiento.</p>
+            <a href="#contacto" class="btn">Pide cita online</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Nuestros servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-soap"></i></div>
+                    <h3>Lavado y estética</h3>
+                    <p>Lavado a mano, encerado, abrillantado y tratamiento de plásticos. Dejamos tu moto como nueva.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-oil-can"></i></div>
+                    <h3>Mantenimiento básico</h3>
+                    <p>Cambios de aceite, filtros, revisión de frenos, cadena y presión de neumáticos.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Pequeñas reparaciones</h3>
+                    <p>Averías eléctricas, cambio de pastillas, ajustes de embrague, etc. Reparación rápida.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-helmet-safety"></i></div>
+                    <h3>Personalización</h3>
+                    <p>Limpieza de escapes, vinilos decorativos y pequeños detalles para que tu moto sea única.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section about">
+        <div class="container about-content">
+            <div class="about-text">
+                <h3>Más que un taller, pasión por las motos</h3>
+                <p>En <strong>MotoShine</strong> tratamos cada moto como si fuera nuestra. Desde scooters hasta deportivas, sabemos lo importante que es para ti. Por eso ofrecemos un trato cercano, productos de calidad y horarios pensados para tu día a día.</p>
+                <div class="about-highlight">
+                    <i class="fas fa-star"></i> <strong>Abiertos todos los días de 8:00 a 18:30</strong> — sin cita previa para servicios básicos.
+                </div>
+                <div style="margin-top: 28px;">
+                    <i class="fas fa-check-circle" style="color:#f97316;"></i> Profesionales titulados<br>
+                    <i class="fas fa-check-circle" style="color:#f97316;"></i> Instalaciones equipadas<br>
+                    <i class="fas fa-check-circle" style="color:#f97316;"></i> Presupuesto sin compromiso
+                </div>
+            </div>
+            <div class="about-image">
+                <!-- Imagen de ejemplo de un taller (Unsplash) -->
+                <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Taller MotoShine">
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Horario de atención</h2>
+            <div class="schedule-table" id="schedule-table">
+                <!-- Generado por JavaScript -->
+            </div>
+            <p style="text-align: center; margin-top: 16px; color: #666;">
+                <i class="fas fa-clock" style="color: #f97316;"></i> Abrimos todos los días, incluyendo fines de semana
+            </p>
+        </div>
+    </section>
+
+    <section id="contacto" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Contacta con nosotros</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3><i class="fas fa-store" style="color:#f97316; margin-right: 10px;"></i>Visítanos</h3>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-pin"></i>
+                        <span>C28M+RJX, Carr. de Sagua, Santa Clara</span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-mobile-alt"></i>
+                        <a href="tel:+5355532138">05 5532138</a> (también WhatsApp)
+                    </div>
+                    <div class="contact-detail">
+                        <i class="far fa-envelope"></i>
+                        <a href="mailto:info@motoshine.es">info@motoshine.es</a>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="far fa-clock"></i>
+                        <span>Lunes a Domingo: 8:00 – 18:30</span>
+                    </div>
+                    <!-- Simulación de mapa estático (solo imagen de referencia) -->
+                    <div class="map-placeholder">
+                        <span style="background-color: rgba(0,0,0,0.6); color: white; padding: 6px 16px; border-radius: 30px;"><i class="fas fa-map-marked-alt"></i> Ver en Google Maps</span>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Escríbenos</h3>
+                    <form action="#" method="post">
+                        <input type="text" name="nombre" placeholder="Tu nombre" required>
+                        <input type="email" name="email" placeholder="Correo electrónico" required>
+                        <input type="tel" name="telefono" placeholder="Teléfono (opcional)">
+                        <textarea name="mensaje" placeholder="Cuéntanos qué necesitas... ¿lavado? ¿revisión? ¡Te damos presupuesto!" required></textarea>
+                        <button type="submit">Enviar mensaje <i class="fas fa-paper-plane" style="margin-left: 6px;"></i></button>
+                    </form>
+                    <p style="font-size: 0.8rem; margin-top: 16px; color: #666;">Te responderemos en menos de 24h (laborables).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>© 2026 MotoShine. Cuidamos tu moto como si fuera nuestra.</p>
+            <p style="margin-top: 12px; font-size: 0.8rem;">C28M+RJX, Carr. de Sagua, Santa Clara · Tel: 05 5532138</p>
+        </div>
+    </footer>
+
+    <script>
+        // Función para determinar si está abierto según la hora del dispositivo
+        function checkOpenStatus() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const currentTime = hours * 60 + minutes; // Minutos desde medianoche
+            
+            const openTime = 8 * 60; // 8:00 en minutos
+            const closeTime = 18 * 60 + 30; // 18:30 en minutos
+
+            return currentTime >= openTime && currentTime < closeTime;
+        }
+
+        // Actualizar el texto del header
+        function updateStatusText() {
+            const statusElement = document.getElementById('status-text');
+            const isOpen = checkOpenStatus();
+            
+            if (isOpen) {
+                statusElement.innerHTML = '<span class="status-indicator">Abierto ahora · Hasta 18:30</span>';
+            } else {
+                statusElement.innerHTML = '<span class="status-indicator closed">Cerrado ahora · Abrimos mañana 8:00</span>';
+            }
+        }
+
+        // Generar la tabla de horarios
+        function generateSchedule() {
+            const days = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+            const todayIndex = new Date().getDay(); // 0 = domingo, 1 = lunes...
+            // Ajustar: nuestro array empieza en lunes (índice 0)
+            let todayAdjusted = todayIndex - 1;
+            if (todayAdjusted < 0) todayAdjusted = 6; // domingo (índice 0) pasa a ser el último (6)
+
+            const tableHTML = days.map((day, index) => {
+                const isToday = (index === todayAdjusted);
+                return `
+                    <div class="schedule-row ${isToday ? 'today' : ''}">
+                        <span class="schedule-day">${day}</span>
+                        <span class="schedule-hours">8:00 a.m. – 6:30 p.m.</span>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('schedule-table').innerHTML = tableHTML;
+        }
+
+        // Ejecutar al cargar la página
+        window.onload = function() {
+            updateStatusText();
+            generateSchedule();
+        };
+    </script>
+</body>
+</html>
