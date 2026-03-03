@@ -36,6 +36,9 @@
             color: white;
             padding: 20px 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .header-content {
@@ -208,6 +211,40 @@
             font-size: 0.95rem;
         }
 
+        /* Galería de fotos */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            aspect-ratio: 4/3;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-loading {
+            text-align: center;
+            padding: 40px;
+            color: #f97316;
+            font-size: 1.2rem;
+        }
+
         /* Tabla de horarios */
         .schedule-table {
             max-width: 600px;
@@ -337,23 +374,23 @@
             color: #f97316;
         }
 
-        .map-placeholder {
-            background-color: #ddd;
-            height: 180px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #444;
-            font-weight: 500;
-            margin-top: 20px;
-            background-image: url('https://maps.googleapis.com/maps/api/staticmap?center=22.441944,-79.951111&zoom=14&size=400x180&key=YOUR_API_KEY&markers=color:orange%7C22.441944,-79.951111');
-            background-size: cover;
-            background-position: center;
+        .map-button {
+            display: inline-block;
+            background-color: #f97316;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 16px;
+            transition: background-color 0.2s;
         }
-        /* Nota: las coordenadas son aproximadas para Santa Clara, Cuba. Reemplazar con las exactas si es necesario */
 
-        /* Formulario sencillo (solo diseño, no funcional) */
+        .map-button:hover {
+            background-color: #e85d0e;
+        }
+
+        /* Formulario a WhatsApp */
         .contact-form input,
         .contact-form textarea {
             width: 100%;
@@ -386,6 +423,32 @@
 
         .contact-form button:hover {
             background-color: #e85d0e;
+        }
+
+        /* WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
         }
 
         /* Footer */
@@ -424,10 +487,25 @@
             .hero h2 {
                 font-size: 2rem;
             }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 26px;
+                bottom: 20px;
+                right: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- WhatsApp Flotante (contacto directo) -->
+    <a href="https://wa.me/5355532138?text=Hola%20MotoShine,%20quiero%20información%20sobre%20sus%20servicios" 
+       class="whatsapp-float" 
+       target="_blank"
+       aria-label="Chat por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <header>
         <div class="container header-content">
             <div class="logo">
@@ -482,6 +560,19 @@
                     <div class="service-icon"><i class="fas fa-helmet-safety"></i></div>
                     <h3>Personalización</h3>
                     <p>Limpieza de escapes, vinilos decorativos y pequeños detalles para que tu moto sea única.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE GALERÍA (carga aleatoria) -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Nuestros trabajos</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Fotos reales de motos que hemos dejado como nuevas</p>
+            <div id="gallery-container" class="gallery-grid">
+                <div class="gallery-loading">
+                    <i class="fas fa-spinner fa-spin"></i> Cargando galería...
                 </div>
             </div>
         </div>
@@ -542,22 +633,28 @@
                         <i class="far fa-clock"></i>
                         <span>Lunes a Domingo: 8:00 – 18:30</span>
                     </div>
-                    <!-- Simulación de mapa estático (solo imagen de referencia) -->
-                    <div class="map-placeholder">
-                        <span style="background-color: rgba(0,0,0,0.6); color: white; padding: 6px 16px; border-radius: 30px;"><i class="fas fa-map-marked-alt"></i> Ver en Google Maps</span>
-                    </div>
+                    
+                    <!-- BOTÓN CÓMO LLEGAR -->
+                    <a href="https://maps.google.com/?q=C28M%2BRJX%2C+Carr.+de+Sagua%2C+Santa+Clara" 
+                       target="_blank" 
+                       class="map-button">
+                        <i class="fas fa-map-marked-alt"></i> Cómo llegar
+                    </a>
                 </div>
 
                 <div class="contact-form">
-                    <h3>Escríbenos</h3>
-                    <form action="#" method="post">
-                        <input type="text" name="nombre" placeholder="Tu nombre" required>
-                        <input type="email" name="email" placeholder="Correo electrónico" required>
-                        <input type="tel" name="telefono" placeholder="Teléfono (opcional)">
-                        <textarea name="mensaje" placeholder="Cuéntanos qué necesitas... ¿lavado? ¿revisión? ¡Te damos presupuesto!" required></textarea>
-                        <button type="submit">Enviar mensaje <i class="fas fa-paper-plane" style="margin-left: 6px;"></i></button>
+                    <h3>Envíanos un mensaje por WhatsApp</h3>
+                    <p style="margin-bottom: 16px; color: #555;">Llena el formulario y te responderemos al toque.</p>
+                    
+                    <!-- FORMULARIO QUE ENVÍA A WHATSAPP -->
+                    <form id="whatsapp-form">
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                        <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Tu WhatsApp (opcional)">
+                        <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas... ¿lavado? ¿revisión?" required></textarea>
+                        <button type="submit">Enviar por WhatsApp <i class="fab fa-whatsapp" style="margin-left: 6px;"></i></button>
                     </form>
-                    <p style="font-size: 0.8rem; margin-top: 16px; color: #666;">Te responderemos en menos de 24h (laborables).</p>
+                    <p style="font-size: 0.8rem; margin-top: 16px; color: #666;">Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar.</p>
                 </div>
             </div>
         </div>
@@ -622,10 +719,94 @@
             document.getElementById('schedule-table').innerHTML = tableHTML;
         }
 
+        // Cargar galería aleatoria desde la carpeta /imagenes/
+        async function loadGallery() {
+            const galleryContainer = document.getElementById('gallery-container');
+            
+            try {
+                // Intentamos cargar un archivo JSON que contenga la lista de imágenes
+                // Si no existe, generamos números aleatorios del 1 al 30
+                let imageCount = 30; // Máximo 30 imágenes
+                let selectedCount = Math.floor(Math.random() * 5) + 1; // Entre 1 y 5 fotos
+                
+                // Generar array de números aleatorios sin repetir
+                let selectedNumbers = [];
+                while (selectedNumbers.length < selectedCount) {
+                    let randomNum = Math.floor(Math.random() * imageCount) + 1;
+                    if (!selectedNumbers.includes(randomNum)) {
+                        selectedNumbers.push(randomNum);
+                    }
+                }
+                
+                // Ordenar para que se vea más ordenado
+                selectedNumbers.sort((a, b) => a - b);
+                
+                // Crear HTML de la galería
+                let galleryHTML = '';
+                selectedNumbers.forEach(num => {
+                    // Las imágenes deben llamarse: 1.jpg, 2.jpg, 3.jpg ... 30.jpg
+                    // Pueden ser .jpg, .png, .jpeg, .webp
+                    galleryHTML += `
+                        <div class="gallery-item">
+                            <img src="imagenes/${num}.jpg" 
+                                 alt="Moto trabajada ${num}"
+                                 loading="lazy"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=MotoShine+${num}'">
+                        </div>
+                    `;
+                });
+                
+                galleryContainer.innerHTML = galleryHTML;
+                
+            } catch (error) {
+                console.error('Error cargando galería:', error);
+                galleryContainer.innerHTML = '<p style="text-align: center; color: #e74c3c;">Error al cargar las imágenes. Verifica que la carpeta "imagenes" exista.</p>';
+            }
+        }
+
+        // Manejar el envío del formulario a WhatsApp
+        document.getElementById('whatsapp-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener valores del formulario
+            const nombre = document.getElementById('nombre').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const mensaje = document.getElementById('mensaje').value.trim();
+            
+            // Validar campos obligatorios
+            if (!nombre || !email || !mensaje) {
+                alert('Por favor completa los campos obligatorios: Nombre, Correo y Mensaje.');
+                return;
+            }
+            
+            // Construir el mensaje de WhatsApp con formato bonito
+            let textoWhatsApp = `*Nuevo mensaje desde MotoShine*%0A`; // %0A = salto de línea
+            textoWhatsApp += `*Nombre:* ${nombre}%0A`;
+            textoWhatsApp += `*Correo:* ${email}%0A`;
+            if (telefono) {
+                textoWhatsApp += `*Teléfono:* ${telefono}%0A`;
+            }
+            textoWhatsApp += `*Mensaje:* ${mensaje}`;
+            
+            // Número de WhatsApp del dueño (código de país + número sin el 05)
+            const numeroWhatsApp = '5355532138'; // Ejemplo: 53 es Cuba, 55532138 (sin 05)
+            
+            // Crear URL de WhatsApp
+            const url = `https://wa.me/${numeroWhatsApp}?text=${textoWhatsApp}`;
+            
+            // Abrir WhatsApp en una nueva pestaña
+            window.open(url, '_blank');
+        });
+
         // Ejecutar al cargar la página
         window.onload = function() {
             updateStatusText();
             generateSchedule();
+            loadGallery();
+            
+            // Actualizar estado cada minuto (por si alguien deja la página abierta)
+            setInterval(updateStatusText, 60000);
         };
     </script>
 </body>
